@@ -1,0 +1,411 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.bugong.mapper.BArticleMapper">
+  <resultMap id="BaseResultMap" type="com.bugong.domain.BArticle">
+    <id column="ID" jdbcType="INTEGER" property="id" />
+    <result column="ARTICLE_NO" jdbcType="INTEGER" property="articleNo" />
+    <result column="TITLE" jdbcType="VARCHAR" property="title" />
+    <result column="USER_ID" jdbcType="INTEGER" property="userId" />
+    <result column="TYPE" jdbcType="INTEGER" property="type" />
+    <result column="LABEL" jdbcType="INTEGER" property="label" />
+    <result column="CREATE_DATA" jdbcType="TIMESTAMP" property="createData" />
+    <result column="UPDATE_DATA" jdbcType="TIMESTAMP" property="updateData" />
+    <result column="STATUS" jdbcType="INTEGER" property="status" />
+    <result column="IS_PUBLIC" jdbcType="INTEGER" property="isPublic" />
+    <result column="RS_1" jdbcType="VARCHAR" property="rs1" />
+    <result column="RS_2" jdbcType="VARCHAR" property="rs2" />
+    <result column="RS_3" jdbcType="VARCHAR" property="rs3" />
+  </resultMap>
+  <resultMap extends="BaseResultMap" id="ResultMapWithBLOBs" type="com.bugong.domain.BArticle">
+    <result column="CONTENT" jdbcType="LONGVARCHAR" property="content" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    ID, ARTICLE_NO, TITLE, USER_ID, TYPE, LABEL, CREATE_DATA, UPDATE_DATA, STATUS, IS_PUBLIC, 
+    RS_1, RS_2, RS_3
+  </sql>
+  <sql id="Blob_Column_List">
+    CONTENT
+  </sql>
+  <select id="selectByExampleWithBLOBs" parameterType="com.bugong.domain.BArticleExample" resultMap="ResultMapWithBLOBs">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from b_article
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByExample" parameterType="com.bugong.domain.BArticleExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from b_article
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="ResultMapWithBLOBs">
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from b_article
+    where ID = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from b_article
+    where ID = #{id,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.bugong.domain.BArticleExample">
+    delete from b_article
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.bugong.domain.BArticle">
+    insert into b_article (ID, ARTICLE_NO, TITLE, 
+      USER_ID, TYPE, LABEL, 
+      CREATE_DATA, UPDATE_DATA, STATUS, 
+      IS_PUBLIC, RS_1, RS_2, 
+      RS_3, CONTENT)
+    values (#{id,jdbcType=INTEGER}, #{articleNo,jdbcType=INTEGER}, #{title,jdbcType=VARCHAR}, 
+      #{userId,jdbcType=INTEGER}, #{type,jdbcType=INTEGER}, #{label,jdbcType=INTEGER}, 
+      #{createData,jdbcType=TIMESTAMP}, #{updateData,jdbcType=TIMESTAMP}, #{status,jdbcType=INTEGER}, 
+      #{isPublic,jdbcType=INTEGER}, #{rs1,jdbcType=VARCHAR}, #{rs2,jdbcType=VARCHAR}, 
+      #{rs3,jdbcType=VARCHAR}, #{content,jdbcType=LONGVARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.bugong.domain.BArticle">
+    insert into b_article
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        ID,
+      </if>
+      <if test="articleNo != null">
+        ARTICLE_NO,
+      </if>
+      <if test="title != null">
+        TITLE,
+      </if>
+      <if test="userId != null">
+        USER_ID,
+      </if>
+      <if test="type != null">
+        TYPE,
+      </if>
+      <if test="label != null">
+        LABEL,
+      </if>
+      <if test="createData != null">
+        CREATE_DATA,
+      </if>
+      <if test="updateData != null">
+        UPDATE_DATA,
+      </if>
+      <if test="status != null">
+        STATUS,
+      </if>
+      <if test="isPublic != null">
+        IS_PUBLIC,
+      </if>
+      <if test="rs1 != null">
+        RS_1,
+      </if>
+      <if test="rs2 != null">
+        RS_2,
+      </if>
+      <if test="rs3 != null">
+        RS_3,
+      </if>
+      <if test="content != null">
+        CONTENT,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="articleNo != null">
+        #{articleNo,jdbcType=INTEGER},
+      </if>
+      <if test="title != null">
+        #{title,jdbcType=VARCHAR},
+      </if>
+      <if test="userId != null">
+        #{userId,jdbcType=INTEGER},
+      </if>
+      <if test="type != null">
+        #{type,jdbcType=INTEGER},
+      </if>
+      <if test="label != null">
+        #{label,jdbcType=INTEGER},
+      </if>
+      <if test="createData != null">
+        #{createData,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateData != null">
+        #{updateData,jdbcType=TIMESTAMP},
+      </if>
+      <if test="status != null">
+        #{status,jdbcType=INTEGER},
+      </if>
+      <if test="isPublic != null">
+        #{isPublic,jdbcType=INTEGER},
+      </if>
+      <if test="rs1 != null">
+        #{rs1,jdbcType=VARCHAR},
+      </if>
+      <if test="rs2 != null">
+        #{rs2,jdbcType=VARCHAR},
+      </if>
+      <if test="rs3 != null">
+        #{rs3,jdbcType=VARCHAR},
+      </if>
+      <if test="content != null">
+        #{content,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.bugong.domain.BArticleExample" resultType="java.lang.Long">
+    select count(*) from b_article
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update b_article
+    <set>
+      <if test="record.id != null">
+        ID = #{record.id,jdbcType=INTEGER},
+      </if>
+      <if test="record.articleNo != null">
+        ARTICLE_NO = #{record.articleNo,jdbcType=INTEGER},
+      </if>
+      <if test="record.title != null">
+        TITLE = #{record.title,jdbcType=VARCHAR},
+      </if>
+      <if test="record.userId != null">
+        USER_ID = #{record.userId,jdbcType=INTEGER},
+      </if>
+      <if test="record.type != null">
+        TYPE = #{record.type,jdbcType=INTEGER},
+      </if>
+      <if test="record.label != null">
+        LABEL = #{record.label,jdbcType=INTEGER},
+      </if>
+      <if test="record.createData != null">
+        CREATE_DATA = #{record.createData,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.updateData != null">
+        UPDATE_DATA = #{record.updateData,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.status != null">
+        STATUS = #{record.status,jdbcType=INTEGER},
+      </if>
+      <if test="record.isPublic != null">
+        IS_PUBLIC = #{record.isPublic,jdbcType=INTEGER},
+      </if>
+      <if test="record.rs1 != null">
+        RS_1 = #{record.rs1,jdbcType=VARCHAR},
+      </if>
+      <if test="record.rs2 != null">
+        RS_2 = #{record.rs2,jdbcType=VARCHAR},
+      </if>
+      <if test="record.rs3 != null">
+        RS_3 = #{record.rs3,jdbcType=VARCHAR},
+      </if>
+      <if test="record.content != null">
+        CONTENT = #{record.content,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExampleWithBLOBs" parameterType="map">
+    update b_article
+    set ID = #{record.id,jdbcType=INTEGER},
+      ARTICLE_NO = #{record.articleNo,jdbcType=INTEGER},
+      TITLE = #{record.title,jdbcType=VARCHAR},
+      USER_ID = #{record.userId,jdbcType=INTEGER},
+      TYPE = #{record.type,jdbcType=INTEGER},
+      LABEL = #{record.label,jdbcType=INTEGER},
+      CREATE_DATA = #{record.createData,jdbcType=TIMESTAMP},
+      UPDATE_DATA = #{record.updateData,jdbcType=TIMESTAMP},
+      STATUS = #{record.status,jdbcType=INTEGER},
+      IS_PUBLIC = #{record.isPublic,jdbcType=INTEGER},
+      RS_1 = #{record.rs1,jdbcType=VARCHAR},
+      RS_2 = #{record.rs2,jdbcType=VARCHAR},
+      RS_3 = #{record.rs3,jdbcType=VARCHAR},
+      CONTENT = #{record.content,jdbcType=LONGVARCHAR}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update b_article
+    set ID = #{record.id,jdbcType=INTEGER},
+      ARTICLE_NO = #{record.articleNo,jdbcType=INTEGER},
+      TITLE = #{record.title,jdbcType=VARCHAR},
+      USER_ID = #{record.userId,jdbcType=INTEGER},
+      TYPE = #{record.type,jdbcType=INTEGER},
+      LABEL = #{record.label,jdbcType=INTEGER},
+      CREATE_DATA = #{record.createData,jdbcType=TIMESTAMP},
+      UPDATE_DATA = #{record.updateData,jdbcType=TIMESTAMP},
+      STATUS = #{record.status,jdbcType=INTEGER},
+      IS_PUBLIC = #{record.isPublic,jdbcType=INTEGER},
+      RS_1 = #{record.rs1,jdbcType=VARCHAR},
+      RS_2 = #{record.rs2,jdbcType=VARCHAR},
+      RS_3 = #{record.rs3,jdbcType=VARCHAR}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.bugong.domain.BArticle">
+    update b_article
+    <set>
+      <if test="articleNo != null">
+        ARTICLE_NO = #{articleNo,jdbcType=INTEGER},
+      </if>
+      <if test="title != null">
+        TITLE = #{title,jdbcType=VARCHAR},
+      </if>
+      <if test="userId != null">
+        USER_ID = #{userId,jdbcType=INTEGER},
+      </if>
+      <if test="type != null">
+        TYPE = #{type,jdbcType=INTEGER},
+      </if>
+      <if test="label != null">
+        LABEL = #{label,jdbcType=INTEGER},
+      </if>
+      <if test="createData != null">
+        CREATE_DATA = #{createData,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateData != null">
+        UPDATE_DATA = #{updateData,jdbcType=TIMESTAMP},
+      </if>
+      <if test="status != null">
+        STATUS = #{status,jdbcType=INTEGER},
+      </if>
+      <if test="isPublic != null">
+        IS_PUBLIC = #{isPublic,jdbcType=INTEGER},
+      </if>
+      <if test="rs1 != null">
+        RS_1 = #{rs1,jdbcType=VARCHAR},
+      </if>
+      <if test="rs2 != null">
+        RS_2 = #{rs2,jdbcType=VARCHAR},
+      </if>
+      <if test="rs3 != null">
+        RS_3 = #{rs3,jdbcType=VARCHAR},
+      </if>
+      <if test="content != null">
+        CONTENT = #{content,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    where ID = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.bugong.domain.BArticle">
+    update b_article
+    set ARTICLE_NO = #{articleNo,jdbcType=INTEGER},
+      TITLE = #{title,jdbcType=VARCHAR},
+      USER_ID = #{userId,jdbcType=INTEGER},
+      TYPE = #{type,jdbcType=INTEGER},
+      LABEL = #{label,jdbcType=INTEGER},
+      CREATE_DATA = #{createData,jdbcType=TIMESTAMP},
+      UPDATE_DATA = #{updateData,jdbcType=TIMESTAMP},
+      STATUS = #{status,jdbcType=INTEGER},
+      IS_PUBLIC = #{isPublic,jdbcType=INTEGER},
+      RS_1 = #{rs1,jdbcType=VARCHAR},
+      RS_2 = #{rs2,jdbcType=VARCHAR},
+      RS_3 = #{rs3,jdbcType=VARCHAR},
+      CONTENT = #{content,jdbcType=LONGVARCHAR}
+    where ID = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.bugong.domain.BArticle">
+    update b_article
+    set ARTICLE_NO = #{articleNo,jdbcType=INTEGER},
+      TITLE = #{title,jdbcType=VARCHAR},
+      USER_ID = #{userId,jdbcType=INTEGER},
+      TYPE = #{type,jdbcType=INTEGER},
+      LABEL = #{label,jdbcType=INTEGER},
+      CREATE_DATA = #{createData,jdbcType=TIMESTAMP},
+      UPDATE_DATA = #{updateData,jdbcType=TIMESTAMP},
+      STATUS = #{status,jdbcType=INTEGER},
+      IS_PUBLIC = #{isPublic,jdbcType=INTEGER},
+      RS_1 = #{rs1,jdbcType=VARCHAR},
+      RS_2 = #{rs2,jdbcType=VARCHAR},
+      RS_3 = #{rs3,jdbcType=VARCHAR}
+    where ID = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

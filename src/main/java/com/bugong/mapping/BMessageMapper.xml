@@ -1,0 +1,341 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.bugong.mapper.BMessageMapper">
+  <resultMap id="BaseResultMap" type="com.bugong.domain.BMessage">
+    <id column="ID" jdbcType="INTEGER" property="id" />
+    <result column="MESSAGE_NO" jdbcType="INTEGER" property="messageNo" />
+    <result column="USER_ID" jdbcType="INTEGER" property="userId" />
+    <result column="MESSAGE_OBJECT_ID" jdbcType="INTEGER" property="messageObjectId" />
+    <result column="CREATE_DATA" jdbcType="TIMESTAMP" property="createData" />
+    <result column="UPDATE_DATA" jdbcType="TIMESTAMP" property="updateData" />
+    <result column="RS_1" jdbcType="VARCHAR" property="rs1" />
+    <result column="RS_2" jdbcType="VARCHAR" property="rs2" />
+    <result column="RS_3" jdbcType="VARCHAR" property="rs3" />
+  </resultMap>
+  <resultMap extends="BaseResultMap" id="ResultMapWithBLOBs" type="com.bugong.domain.BMessage">
+    <result column="CONTENT" jdbcType="LONGVARCHAR" property="content" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    ID, MESSAGE_NO, USER_ID, MESSAGE_OBJECT_ID, CREATE_DATA, UPDATE_DATA, RS_1, RS_2, 
+    RS_3
+  </sql>
+  <sql id="Blob_Column_List">
+    CONTENT
+  </sql>
+  <select id="selectByExampleWithBLOBs" parameterType="com.bugong.domain.BMessageExample" resultMap="ResultMapWithBLOBs">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from b_message
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByExample" parameterType="com.bugong.domain.BMessageExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from b_message
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="ResultMapWithBLOBs">
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from b_message
+    where ID = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from b_message
+    where ID = #{id,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.bugong.domain.BMessageExample">
+    delete from b_message
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.bugong.domain.BMessage">
+    insert into b_message (ID, MESSAGE_NO, USER_ID, 
+      MESSAGE_OBJECT_ID, CREATE_DATA, UPDATE_DATA, 
+      RS_1, RS_2, RS_3, CONTENT
+      )
+    values (#{id,jdbcType=INTEGER}, #{messageNo,jdbcType=INTEGER}, #{userId,jdbcType=INTEGER}, 
+      #{messageObjectId,jdbcType=INTEGER}, #{createData,jdbcType=TIMESTAMP}, #{updateData,jdbcType=TIMESTAMP}, 
+      #{rs1,jdbcType=VARCHAR}, #{rs2,jdbcType=VARCHAR}, #{rs3,jdbcType=VARCHAR}, #{content,jdbcType=LONGVARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.bugong.domain.BMessage">
+    insert into b_message
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        ID,
+      </if>
+      <if test="messageNo != null">
+        MESSAGE_NO,
+      </if>
+      <if test="userId != null">
+        USER_ID,
+      </if>
+      <if test="messageObjectId != null">
+        MESSAGE_OBJECT_ID,
+      </if>
+      <if test="createData != null">
+        CREATE_DATA,
+      </if>
+      <if test="updateData != null">
+        UPDATE_DATA,
+      </if>
+      <if test="rs1 != null">
+        RS_1,
+      </if>
+      <if test="rs2 != null">
+        RS_2,
+      </if>
+      <if test="rs3 != null">
+        RS_3,
+      </if>
+      <if test="content != null">
+        CONTENT,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="messageNo != null">
+        #{messageNo,jdbcType=INTEGER},
+      </if>
+      <if test="userId != null">
+        #{userId,jdbcType=INTEGER},
+      </if>
+      <if test="messageObjectId != null">
+        #{messageObjectId,jdbcType=INTEGER},
+      </if>
+      <if test="createData != null">
+        #{createData,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateData != null">
+        #{updateData,jdbcType=TIMESTAMP},
+      </if>
+      <if test="rs1 != null">
+        #{rs1,jdbcType=VARCHAR},
+      </if>
+      <if test="rs2 != null">
+        #{rs2,jdbcType=VARCHAR},
+      </if>
+      <if test="rs3 != null">
+        #{rs3,jdbcType=VARCHAR},
+      </if>
+      <if test="content != null">
+        #{content,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.bugong.domain.BMessageExample" resultType="java.lang.Long">
+    select count(*) from b_message
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update b_message
+    <set>
+      <if test="record.id != null">
+        ID = #{record.id,jdbcType=INTEGER},
+      </if>
+      <if test="record.messageNo != null">
+        MESSAGE_NO = #{record.messageNo,jdbcType=INTEGER},
+      </if>
+      <if test="record.userId != null">
+        USER_ID = #{record.userId,jdbcType=INTEGER},
+      </if>
+      <if test="record.messageObjectId != null">
+        MESSAGE_OBJECT_ID = #{record.messageObjectId,jdbcType=INTEGER},
+      </if>
+      <if test="record.createData != null">
+        CREATE_DATA = #{record.createData,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.updateData != null">
+        UPDATE_DATA = #{record.updateData,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.rs1 != null">
+        RS_1 = #{record.rs1,jdbcType=VARCHAR},
+      </if>
+      <if test="record.rs2 != null">
+        RS_2 = #{record.rs2,jdbcType=VARCHAR},
+      </if>
+      <if test="record.rs3 != null">
+        RS_3 = #{record.rs3,jdbcType=VARCHAR},
+      </if>
+      <if test="record.content != null">
+        CONTENT = #{record.content,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExampleWithBLOBs" parameterType="map">
+    update b_message
+    set ID = #{record.id,jdbcType=INTEGER},
+      MESSAGE_NO = #{record.messageNo,jdbcType=INTEGER},
+      USER_ID = #{record.userId,jdbcType=INTEGER},
+      MESSAGE_OBJECT_ID = #{record.messageObjectId,jdbcType=INTEGER},
+      CREATE_DATA = #{record.createData,jdbcType=TIMESTAMP},
+      UPDATE_DATA = #{record.updateData,jdbcType=TIMESTAMP},
+      RS_1 = #{record.rs1,jdbcType=VARCHAR},
+      RS_2 = #{record.rs2,jdbcType=VARCHAR},
+      RS_3 = #{record.rs3,jdbcType=VARCHAR},
+      CONTENT = #{record.content,jdbcType=LONGVARCHAR}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update b_message
+    set ID = #{record.id,jdbcType=INTEGER},
+      MESSAGE_NO = #{record.messageNo,jdbcType=INTEGER},
+      USER_ID = #{record.userId,jdbcType=INTEGER},
+      MESSAGE_OBJECT_ID = #{record.messageObjectId,jdbcType=INTEGER},
+      CREATE_DATA = #{record.createData,jdbcType=TIMESTAMP},
+      UPDATE_DATA = #{record.updateData,jdbcType=TIMESTAMP},
+      RS_1 = #{record.rs1,jdbcType=VARCHAR},
+      RS_2 = #{record.rs2,jdbcType=VARCHAR},
+      RS_3 = #{record.rs3,jdbcType=VARCHAR}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.bugong.domain.BMessage">
+    update b_message
+    <set>
+      <if test="messageNo != null">
+        MESSAGE_NO = #{messageNo,jdbcType=INTEGER},
+      </if>
+      <if test="userId != null">
+        USER_ID = #{userId,jdbcType=INTEGER},
+      </if>
+      <if test="messageObjectId != null">
+        MESSAGE_OBJECT_ID = #{messageObjectId,jdbcType=INTEGER},
+      </if>
+      <if test="createData != null">
+        CREATE_DATA = #{createData,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateData != null">
+        UPDATE_DATA = #{updateData,jdbcType=TIMESTAMP},
+      </if>
+      <if test="rs1 != null">
+        RS_1 = #{rs1,jdbcType=VARCHAR},
+      </if>
+      <if test="rs2 != null">
+        RS_2 = #{rs2,jdbcType=VARCHAR},
+      </if>
+      <if test="rs3 != null">
+        RS_3 = #{rs3,jdbcType=VARCHAR},
+      </if>
+      <if test="content != null">
+        CONTENT = #{content,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    where ID = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.bugong.domain.BMessage">
+    update b_message
+    set MESSAGE_NO = #{messageNo,jdbcType=INTEGER},
+      USER_ID = #{userId,jdbcType=INTEGER},
+      MESSAGE_OBJECT_ID = #{messageObjectId,jdbcType=INTEGER},
+      CREATE_DATA = #{createData,jdbcType=TIMESTAMP},
+      UPDATE_DATA = #{updateData,jdbcType=TIMESTAMP},
+      RS_1 = #{rs1,jdbcType=VARCHAR},
+      RS_2 = #{rs2,jdbcType=VARCHAR},
+      RS_3 = #{rs3,jdbcType=VARCHAR},
+      CONTENT = #{content,jdbcType=LONGVARCHAR}
+    where ID = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.bugong.domain.BMessage">
+    update b_message
+    set MESSAGE_NO = #{messageNo,jdbcType=INTEGER},
+      USER_ID = #{userId,jdbcType=INTEGER},
+      MESSAGE_OBJECT_ID = #{messageObjectId,jdbcType=INTEGER},
+      CREATE_DATA = #{createData,jdbcType=TIMESTAMP},
+      UPDATE_DATA = #{updateData,jdbcType=TIMESTAMP},
+      RS_1 = #{rs1,jdbcType=VARCHAR},
+      RS_2 = #{rs2,jdbcType=VARCHAR},
+      RS_3 = #{rs3,jdbcType=VARCHAR}
+    where ID = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

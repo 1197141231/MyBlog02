@@ -1,0 +1,359 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.bugong.mapper.BUserMapper">
+  <resultMap id="BaseResultMap" type="com.bugong.domain.BUser">
+    <id column="ID" jdbcType="INTEGER" property="id" />
+    <result column="USER_NO" jdbcType="INTEGER" property="userNo" />
+    <result column="USER_NAME" jdbcType="VARCHAR" property="userName" />
+    <result column="USER_PWD" jdbcType="VARCHAR" property="userPwd" />
+    <result column="REAL_NAME" jdbcType="VARCHAR" property="realName" />
+    <result column="EMAIL" jdbcType="VARCHAR" property="email" />
+    <result column="USER_DESCRIPTION" jdbcType="VARCHAR" property="userDescription" />
+    <result column="ICON" jdbcType="VARCHAR" property="icon" />
+    <result column="ROLE_ID" jdbcType="INTEGER" property="roleId" />
+    <result column="CREATE_DATA" jdbcType="TIMESTAMP" property="createData" />
+    <result column="UPDATE_DATA" jdbcType="TIMESTAMP" property="updateData" />
+    <result column="RS_1" jdbcType="VARCHAR" property="rs1" />
+    <result column="RS_2" jdbcType="VARCHAR" property="rs2" />
+    <result column="RS_3" jdbcType="VARCHAR" property="rs3" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    ID, USER_NO, USER_NAME, USER_PWD, REAL_NAME, EMAIL, USER_DESCRIPTION, ICON, ROLE_ID, 
+    CREATE_DATA, UPDATE_DATA, RS_1, RS_2, RS_3
+  </sql>
+  <select id="selectByExample" parameterType="com.bugong.domain.BUserExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from b_user
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from b_user
+    where ID = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from b_user
+    where ID = #{id,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.bugong.domain.BUserExample">
+    delete from b_user
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.bugong.domain.BUser">
+    insert into b_user (ID, USER_NO, USER_NAME, 
+      USER_PWD, REAL_NAME, EMAIL, 
+      USER_DESCRIPTION, ICON, ROLE_ID, 
+      CREATE_DATA, UPDATE_DATA, RS_1, 
+      RS_2, RS_3)
+    values (#{id,jdbcType=INTEGER}, #{userNo,jdbcType=INTEGER}, #{userName,jdbcType=VARCHAR}, 
+      #{userPwd,jdbcType=VARCHAR}, #{realName,jdbcType=VARCHAR}, #{email,jdbcType=VARCHAR}, 
+      #{userDescription,jdbcType=VARCHAR}, #{icon,jdbcType=VARCHAR}, #{roleId,jdbcType=INTEGER}, 
+      #{createData,jdbcType=TIMESTAMP}, #{updateData,jdbcType=TIMESTAMP}, #{rs1,jdbcType=VARCHAR}, 
+      #{rs2,jdbcType=VARCHAR}, #{rs3,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.bugong.domain.BUser">
+    insert into b_user
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        ID,
+      </if>
+      <if test="userNo != null">
+        USER_NO,
+      </if>
+      <if test="userName != null">
+        USER_NAME,
+      </if>
+      <if test="userPwd != null">
+        USER_PWD,
+      </if>
+      <if test="realName != null">
+        REAL_NAME,
+      </if>
+      <if test="email != null">
+        EMAIL,
+      </if>
+      <if test="userDescription != null">
+        USER_DESCRIPTION,
+      </if>
+      <if test="icon != null">
+        ICON,
+      </if>
+      <if test="roleId != null">
+        ROLE_ID,
+      </if>
+      <if test="createData != null">
+        CREATE_DATA,
+      </if>
+      <if test="updateData != null">
+        UPDATE_DATA,
+      </if>
+      <if test="rs1 != null">
+        RS_1,
+      </if>
+      <if test="rs2 != null">
+        RS_2,
+      </if>
+      <if test="rs3 != null">
+        RS_3,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="userNo != null">
+        #{userNo,jdbcType=INTEGER},
+      </if>
+      <if test="userName != null">
+        #{userName,jdbcType=VARCHAR},
+      </if>
+      <if test="userPwd != null">
+        #{userPwd,jdbcType=VARCHAR},
+      </if>
+      <if test="realName != null">
+        #{realName,jdbcType=VARCHAR},
+      </if>
+      <if test="email != null">
+        #{email,jdbcType=VARCHAR},
+      </if>
+      <if test="userDescription != null">
+        #{userDescription,jdbcType=VARCHAR},
+      </if>
+      <if test="icon != null">
+        #{icon,jdbcType=VARCHAR},
+      </if>
+      <if test="roleId != null">
+        #{roleId,jdbcType=INTEGER},
+      </if>
+      <if test="createData != null">
+        #{createData,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateData != null">
+        #{updateData,jdbcType=TIMESTAMP},
+      </if>
+      <if test="rs1 != null">
+        #{rs1,jdbcType=VARCHAR},
+      </if>
+      <if test="rs2 != null">
+        #{rs2,jdbcType=VARCHAR},
+      </if>
+      <if test="rs3 != null">
+        #{rs3,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.bugong.domain.BUserExample" resultType="java.lang.Long">
+    select count(*) from b_user
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update b_user
+    <set>
+      <if test="record.id != null">
+        ID = #{record.id,jdbcType=INTEGER},
+      </if>
+      <if test="record.userNo != null">
+        USER_NO = #{record.userNo,jdbcType=INTEGER},
+      </if>
+      <if test="record.userName != null">
+        USER_NAME = #{record.userName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.userPwd != null">
+        USER_PWD = #{record.userPwd,jdbcType=VARCHAR},
+      </if>
+      <if test="record.realName != null">
+        REAL_NAME = #{record.realName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.email != null">
+        EMAIL = #{record.email,jdbcType=VARCHAR},
+      </if>
+      <if test="record.userDescription != null">
+        USER_DESCRIPTION = #{record.userDescription,jdbcType=VARCHAR},
+      </if>
+      <if test="record.icon != null">
+        ICON = #{record.icon,jdbcType=VARCHAR},
+      </if>
+      <if test="record.roleId != null">
+        ROLE_ID = #{record.roleId,jdbcType=INTEGER},
+      </if>
+      <if test="record.createData != null">
+        CREATE_DATA = #{record.createData,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.updateData != null">
+        UPDATE_DATA = #{record.updateData,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.rs1 != null">
+        RS_1 = #{record.rs1,jdbcType=VARCHAR},
+      </if>
+      <if test="record.rs2 != null">
+        RS_2 = #{record.rs2,jdbcType=VARCHAR},
+      </if>
+      <if test="record.rs3 != null">
+        RS_3 = #{record.rs3,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update b_user
+    set ID = #{record.id,jdbcType=INTEGER},
+      USER_NO = #{record.userNo,jdbcType=INTEGER},
+      USER_NAME = #{record.userName,jdbcType=VARCHAR},
+      USER_PWD = #{record.userPwd,jdbcType=VARCHAR},
+      REAL_NAME = #{record.realName,jdbcType=VARCHAR},
+      EMAIL = #{record.email,jdbcType=VARCHAR},
+      USER_DESCRIPTION = #{record.userDescription,jdbcType=VARCHAR},
+      ICON = #{record.icon,jdbcType=VARCHAR},
+      ROLE_ID = #{record.roleId,jdbcType=INTEGER},
+      CREATE_DATA = #{record.createData,jdbcType=TIMESTAMP},
+      UPDATE_DATA = #{record.updateData,jdbcType=TIMESTAMP},
+      RS_1 = #{record.rs1,jdbcType=VARCHAR},
+      RS_2 = #{record.rs2,jdbcType=VARCHAR},
+      RS_3 = #{record.rs3,jdbcType=VARCHAR}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.bugong.domain.BUser">
+    update b_user
+    <set>
+      <if test="userNo != null">
+        USER_NO = #{userNo,jdbcType=INTEGER},
+      </if>
+      <if test="userName != null">
+        USER_NAME = #{userName,jdbcType=VARCHAR},
+      </if>
+      <if test="userPwd != null">
+        USER_PWD = #{userPwd,jdbcType=VARCHAR},
+      </if>
+      <if test="realName != null">
+        REAL_NAME = #{realName,jdbcType=VARCHAR},
+      </if>
+      <if test="email != null">
+        EMAIL = #{email,jdbcType=VARCHAR},
+      </if>
+      <if test="userDescription != null">
+        USER_DESCRIPTION = #{userDescription,jdbcType=VARCHAR},
+      </if>
+      <if test="icon != null">
+        ICON = #{icon,jdbcType=VARCHAR},
+      </if>
+      <if test="roleId != null">
+        ROLE_ID = #{roleId,jdbcType=INTEGER},
+      </if>
+      <if test="createData != null">
+        CREATE_DATA = #{createData,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateData != null">
+        UPDATE_DATA = #{updateData,jdbcType=TIMESTAMP},
+      </if>
+      <if test="rs1 != null">
+        RS_1 = #{rs1,jdbcType=VARCHAR},
+      </if>
+      <if test="rs2 != null">
+        RS_2 = #{rs2,jdbcType=VARCHAR},
+      </if>
+      <if test="rs3 != null">
+        RS_3 = #{rs3,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where ID = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.bugong.domain.BUser">
+    update b_user
+    set USER_NO = #{userNo,jdbcType=INTEGER},
+      USER_NAME = #{userName,jdbcType=VARCHAR},
+      USER_PWD = #{userPwd,jdbcType=VARCHAR},
+      REAL_NAME = #{realName,jdbcType=VARCHAR},
+      EMAIL = #{email,jdbcType=VARCHAR},
+      USER_DESCRIPTION = #{userDescription,jdbcType=VARCHAR},
+      ICON = #{icon,jdbcType=VARCHAR},
+      ROLE_ID = #{roleId,jdbcType=INTEGER},
+      CREATE_DATA = #{createData,jdbcType=TIMESTAMP},
+      UPDATE_DATA = #{updateData,jdbcType=TIMESTAMP},
+      RS_1 = #{rs1,jdbcType=VARCHAR},
+      RS_2 = #{rs2,jdbcType=VARCHAR},
+      RS_3 = #{rs3,jdbcType=VARCHAR}
+    where ID = #{id,jdbcType=INTEGER}
+  </update>
+  
+  <!--登陆验证 -->
+  <select id="login" parameterType="com.bugong.domain.BUser" resultMap="BaseResultMap">
+    select * from b_user where USER_NAME = #{userName}
+  </select>
+  
+</mapper>
