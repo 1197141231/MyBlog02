@@ -33,4 +33,8 @@ public interface BArticleMapper {
     int updateByPrimaryKeyWithBLOBs(BArticle record);
 
     int updateByPrimaryKey(BArticle record);
+
+
+    //查找用户下所有文章
+    List<BArticle> selectUserArt(int userId);
 }
