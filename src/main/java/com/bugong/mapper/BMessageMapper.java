@@ -33,4 +33,9 @@ public interface BMessageMapper {
     int updateByPrimaryKeyWithBLOBs(BMessage record);
 
     int updateByPrimaryKey(BMessage record);
+
+
+
+
+
 }
