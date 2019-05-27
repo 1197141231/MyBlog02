@@ -7,6 +7,7 @@
 --%>
 
 
+
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
@@ -52,7 +53,7 @@
                 </dt>
                 <hr>
                 <dd>
-                    <table frame="void" class=""  id="">
+                    <table frame="void" class="table"  id="">
                         <tr>
                             <th>
                                 原创
@@ -70,6 +71,7 @@
                         <tr >
                             <td>
                                 90
+
                             </td>
                             <td>
                                 50
@@ -151,6 +153,23 @@
         </div>
     </div>
 
+    <form action="/Article/Array" method="post">
+        <table>
+            <tr>
+                <td>用户名:</td>
+                <td><input name="username" size="15"></td>
+            </tr>
+            <tr>
+                <td>密码:</td>
+                <td><input name="password" size="15"></td>
+            </tr>
+            <tr>
+                <td><button type="submit">提交</button></td>
+                <td><button type="reset">重置</button></td>
+            </tr>
+        </table>
+    </form>
+    <span>服务器信息：${info}</span>
 
 
 </div>
@@ -167,69 +186,7 @@
 <script>
     $("#mytab").bootstrapTable('refresh', {url : url});
 
-    $(function(){
-        $('#table').bootstrapTable({
-            ajax : function (request) {
-                $.ajax({
-                    type : "GET",
-                    url : "Article/selectArtCount",
-                    contentType: "application/json;charset=utf-8",
-                    dataType:"jsonp",
-                    data:'',
-                    jsonp:'callback',
-                    success : function (msg) {
-                        request.success({
-                            row : msg
-                        });
-                        $('#table').bootstrapTable('load', msg);
-                    },
-                    error:function(){
-                        alert("错误");
-                    }
-                });
-            },
 
-            toolbar:'#toolbar',
-            singleSelect:true,
-            clickToSelect:true,
-            sortName: "create_time",
-            sortOrder: "desc",
-            pageSize: 15,
-            pageNumber: 1,
-            pageList: "[10, 25, 50, 100, All]",
-            showToggle: true,
-            showRefresh: true,
-            showColumns: true,
-            search: true,
-            pagination: true,
-            columns: [{
-                field: "state",
-                checkbox:true,
-            },{
-                field: 'scene_name',
-                title: '推荐位名称',
-                switchable: true
-            }, {
-                field: 'scene',
-                title: '场景',
-                switchable: true
-            }, {
-                field: 'creater',
-                title: '创建者',
-                switchable: true
-            }, {
-                field: 'create_time',
-                title: '创建时间',
-                switchable: true,
-                sortable: true
-            }, {
-                field: 'managers',
-                title: '授权账号',
-                switchable: true
-            }],
-
-        });
-    })
 
 
 
