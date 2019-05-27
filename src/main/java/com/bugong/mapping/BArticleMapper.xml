@@ -408,4 +408,10 @@
       RS_3 = #{rs3,jdbcType=VARCHAR}
     where ID = #{id,jdbcType=INTEGER}
   </update>
+
+  <!--登陆验证 -->
+  <select id="selectUserArt" parameterType="com.bugong.domain.BArticle" resultType="com.bugong.domain.BArticle">
+    select * from b_article where USER_ID= #{userId}
+  </select>
+
 </mapper>

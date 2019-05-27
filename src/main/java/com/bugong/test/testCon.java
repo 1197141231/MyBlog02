@@ -1,5 +1,6 @@
 package com.bugong.test;
 
+import com.bugong.domain.BRole;
 import com.bugong.domain.Person;
 
 import javax.servlet.ServletException;
@@ -18,16 +19,16 @@ public class testCon extends HttpServlet {
 
         try {
             Class.forName("com.mysql.jdbc.Driver");
-            Connection con=DriverManager.getConnection("jdbc:mysql://192.168.1.199:3306/test", "root", "Oraps123");
-            PreparedStatement ps=con.prepareStatement("select * from person");
+            Connection con=DriverManager.getConnection("jdbc:mysql://localhost:3306/blog", "root", "swj000123");
+            PreparedStatement ps=con.prepareStatement("select * from b_role");
             ResultSet rs=ps.executeQuery();
-            ArrayList<Person> books=new ArrayList<Person>();
+            ArrayList<BRole> books=new ArrayList<BRole>();
             while(rs.next())
             {
-                Person b= new Person();
+                BRole b= new BRole();
                 b.setId(rs.getInt(0));
-                b.setName(rs.getString(1));
-                b.setAge(rs.getInt(2));
+                b.setRoleName(rs.getString(2));
+                b.setRoleNo(rs.getInt(1));
 
                 books.add(b);
             }
