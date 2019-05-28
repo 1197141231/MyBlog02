@@ -16,9 +16,9 @@
 	<!-- 配置视图解析器 -->
 	<bean
 		class="org.springframework.web.servlet.view.InternalResourceViewResolver">
-		<property name="prefix" value="/WEB-INF/jsp/"></property>
+		<property name="prefix" value="/static/jsp/"></property>
 
-		<!--<property name="suffix" value=".jsp"></property>-->
+		<property name="suffix" value=".jsp"></property>
 	</bean>
 
 	<!-- 拦截器 -->

@@ -70,8 +70,7 @@
                         </tr>
                         <tr >
                             <td>
-                                90
-
+                                <p id="articleCount"></p>
                             </td>
                             <td>
                                 50
@@ -121,7 +120,17 @@
                 <dd>二级</dd>
                 </div>
                 <hr>
-                <dd>二级</dd>
+                <dd>
+                    <div id="result" style="font-size:16px;color:red;"></div >
+                    <table class="tables" id="project" border="2px">
+                        <tr >
+                        <tr>
+                            <td class="table_tit">用户名</td>
+                            <td class="table_tit">密码</td>
+
+                    </table >
+
+                </dd>
                 <dt>一级</dt>
                 <dd>二级</dd>
                 <dd>二级</dd>
@@ -172,6 +181,7 @@
     <span>服务器信息：${info}</span>
 
 
+
 </div>
 
 
@@ -184,11 +194,75 @@
 </body>
 
 <script>
-    $("#mytab").bootstrapTable('refresh', {url : url});
+   // $("#mytab").bootstrapTable('refresh', {url : url});
+
+    $(document).ready(function(){
+
+        $.ajax({
+            type:"GET",
+            url:"/Article/news",
+            success:function(response){
+             //   alert("***"+response)
+
+
+
+              //  var json =[{"name":"项海军","password":"123456"}];
+
+                 $("#result ").html("遍历");
+
+              //   $.each(response,function(n,value) {
+              //       alert(n+' '+value);
+              //       var trs = "";
+              //       alert("**"+value.content)
+              //       trs += " <tr><td> " +value.name+" </td><td>" + value.password +"</td></tr>";
+              //       tbody += trs;
+              //   });
+              //   $("#project").append(tbody);
+
+                //解析后台传过来的json
+                var objs = eval(response);
+                var tbody = "";
+                for(var j = 0;j<objs.length;j++){
+                    // alert(objs[j].content);
+                    // alert(objs[j].id);
+                    var trs = "";
+                    trs += "<tr><td class='table_tit'>" +objs[j].content+"</td><td class='table_tit'>" + objs[j].id +"</td></tr>";
+                    tbody += trs;
+
+                //    alert("@@@"+tbody);
+                }
+                $("#project").append(tbody);
+
+                //用户下文章数
+                $("#articleCount").append(objs.length);
+
+            },
+            error : function(e) {
+                alert('Failed!: ' + e);
+            }
+        });
+    });
+
 
 
 
 
 
 </script>
+
+<style type="text/css">
+
+.tables{
+width: 100%;
+height: 10%;
+table-layout: fixed;
+border: 2px;
+}
+.table_tit{
+white-space: nowrap;    /*  禁止td换行 */
+overflow: hidden;        /* 隐藏X,Y滚动条 */
+text-overflow: ellipsis;}   /*将显示不完的以显示*/
+
+</style>
+
 </html>

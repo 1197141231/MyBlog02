@@ -18,7 +18,10 @@ public class ArticleServiceImpl implements ArticleService {
 
     @Override
     public List<BArticle> selectUserArt(int userId) {
+       // List<BArticle> list =  bArticleMapper.selectUserArt(userId);
         List<BArticle> list =  bArticleMapper.selectUserArt(userId);
+
         return list;
     }
+
 }

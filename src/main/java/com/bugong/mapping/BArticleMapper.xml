@@ -410,7 +410,7 @@
   </update>
 
   <!--登陆验证 -->
-  <select id="selectUserArt" parameterType="com.bugong.domain.BArticle" resultType="com.bugong.domain.BArticle">
+  <select id="selectUserArt"  resultType="com.bugong.domain.BArticle">
     select * from b_article where USER_ID= #{userId}
   </select>
 

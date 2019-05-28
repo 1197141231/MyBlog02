@@ -1,7 +1,9 @@
 package com.bugong.controller;
 
+
 import com.bugong.domain.BArticle;
 import com.bugong.service.ArticleService;
+import net.sf.json.JSONArray;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -11,6 +13,8 @@ import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.io.IOException;
+
 import java.util.List;
 
 
@@ -45,8 +49,24 @@ public class ArticleController {
     public String normal(HttpServletRequest request, @RequestParam("username") String username, @RequestParam("password") String password){
         System.out.println("username:"+username+" password:"+password);
         request.setAttribute("info", "Normal server recv:"+username+" "+password);
-        return "article.jsp";
+      //  return "/static/jsp/success.jsp";
+        return "/article";
     }
 
+
+        @RequestMapping("/news")
+        public void getKeyWords(HttpServletResponse response) {
+
+            List<BArticle> list = articleService.selectUserArt(userId);
+            System.out.println(list);
+
+            try {
+                JSONArray json = JSONArray.fromObject(list);
+
+                response.getWriter().print(json);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
 
 }
