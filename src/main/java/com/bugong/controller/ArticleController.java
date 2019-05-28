@@ -56,13 +56,11 @@ public class ArticleController {
 
         @RequestMapping("/news")
         public void getKeyWords(HttpServletResponse response) {
-
             List<BArticle> list = articleService.selectUserArt(userId);
             System.out.println(list);
 
             try {
                 JSONArray json = JSONArray.fromObject(list);
-
                 response.getWriter().print(json);
             } catch (IOException e) {
                 e.printStackTrace();

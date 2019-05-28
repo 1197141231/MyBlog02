@@ -1,8 +1,10 @@
 package com.bugong.domain;
 
+import com.bugong.common.Page;
+
 import java.util.Date;
 
-public class BArticle {
+public class BArticle extends Page {
     private Integer id;
 
     private Integer articleNo;
