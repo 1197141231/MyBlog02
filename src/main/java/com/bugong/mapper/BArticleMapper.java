@@ -36,5 +36,8 @@ public interface BArticleMapper {
 
 
     //查找用户下所有文章
-    List<BArticle> selectUserArt(int userId);
+    List<BArticle> selectUserArt(BArticle bArticle);
+    //查个数量
+    List<BArticle> selectUserArtCount(BArticle bArticle);
+
 }

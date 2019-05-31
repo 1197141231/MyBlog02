@@ -3,12 +3,9 @@ package com.bugong.controller;
 
 import com.bugong.domain.BArticle;
 import com.bugong.service.ArticleService;
-import net.sf.json.JSONArray;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
@@ -23,24 +20,14 @@ import java.util.List;
 public class ArticleController {
     @Autowired
     ArticleService articleService ;
-    int userId = 1 ;
+
+
 
     @RequestMapping(value = "selectArtCount",method = RequestMethod.GET)
    // public  List<BArticle> selectArtCount(){
-    public ModelAndView selectArtCount(HttpServletRequest request,
-                                       HttpServletResponse response){
+    public ModelAndView selectArtCount(HttpServletRequest request, HttpServletResponse response){
 
-        ModelAndView modelView = new ModelAndView();
-        modelView.addObject("name","张三");
-        //类似于 request.setAttribute()
-//        List<BArticle> list =  articleService.selectUserArt(userId);
-//        modelView.addObject(list);
-        modelView.setViewName("");
-
-
-       // int re = articleService.getArtCount(userId);
-      //  List<BArticle> list =  articleService.selectUserArt(userId);
-        return modelView ;
+        return null ;
     }
 
 
@@ -54,17 +41,13 @@ public class ArticleController {
     }
 
 
-        @RequestMapping("/news")
-        public void getKeyWords(HttpServletResponse response) {
-            List<BArticle> list = articleService.selectUserArt(userId);
-            System.out.println(list);
-
-            try {
-                JSONArray json = JSONArray.fromObject(list);
-                response.getWriter().print(json);
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-        }
+    @RequestMapping("/news")
+    @ResponseBody //返回数据定义为json,格式依赖于jackson包，没有报错
+    public List<BArticle> getKeyWords() {
+        BArticle bArticle = new BArticle();
+        bArticle.setUserId(1);
+        List<BArticle> list = articleService.selectUserArt(bArticle);
+        return list;
+    }
 
 }

@@ -409,9 +409,29 @@
     where ID = #{id,jdbcType=INTEGER}
   </update>
 
-  <!--登陆验证 -->
+  <!--条件查询 -->
   <select id="selectUserArt"  resultType="com.bugong.domain.BArticle">
     select * from b_article where USER_ID= #{userId}
+    <if test="title!=null and title !=''">
+      AND title LIKE CONCAT('%',#{title},'%')
+    </if>
+    <if test="content!=null and content !=''">
+      AND content LIKE CONCAT('%',#{content},'%')
+    </if>
+    <if test="limit!=null and limit !=''">
+    LIMIT #{offset},#{limit}
+    </if>
+  </select>
+
+  <!--查询个数量 -->
+  <select id="selectUserArtCount"  resultType="com.bugong.domain.BArticle">
+    select * from b_article where USER_ID= #{userId}
+    <if test="title!=null and title !=''">
+      AND title LIKE CONCAT('%',#{title},'%')
+    </if>
+    <if test="content!=null and content !=''">
+      AND content LIKE CONCAT('%',#{content},'%')
+    </if>
   </select>
 
 </mapper>

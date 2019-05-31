@@ -1,4 +1,4 @@
-package com.bugong.common;
+package com.bugong.domain;
 
 import java.util.ArrayList;
 import java.util.List;

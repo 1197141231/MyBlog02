@@ -1,7 +1,5 @@
 package com.bugong.domain;
 
-import com.bugong.common.Page;
-
 import java.util.Date;
 
 public class BArticle extends Page {

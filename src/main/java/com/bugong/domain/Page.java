@@ -1,4 +1,4 @@
-package com.bugong.common;
+package com.bugong.domain;
 
 public class Page {
 
