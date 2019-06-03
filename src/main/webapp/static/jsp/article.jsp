@@ -231,17 +231,16 @@
                 alert('Failed!: ' + e);
             }
         });
-    });
 
 
-    $(document).ready(function(){
         $.ajax({
             type:"post",
             //   contentType: "application/json;charset=UTF-8",
-            url:"/Page/tableExampleServer",
-            success:function(response){
+            url:"/Page/tableExampleServer02",
+            success:function(data){
                 //解析后台传过来的json
-                var objs = eval(response);
+                var objs = JSON.parse(data);
+             //   var objs = eval(response);
                 var tbody = "";
                 for(var j = 0;j<objs.length;j++){
                     var trs = "";
@@ -256,7 +255,11 @@
                 alert('Failed!: ' + e);
             }
         });
+
+
     });
+
+
 </script>
 
 <style type="text/css">
