@@ -236,7 +236,7 @@
         $.ajax({
             type:"post",
             //   contentType: "application/json;charset=UTF-8",
-            url:"/Page/tableExampleServer02",
+            url:"/Page/tableExampleServer01",
             success:function(data){
                 //解析后台传过来的json
                 var objs = JSON.parse(data);

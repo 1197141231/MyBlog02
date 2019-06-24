@@ -67,28 +67,5 @@ public class PageHelperController {
 
     }
 
-    @RequestMapping("/tableExampleServer02")
-    @ResponseBody
-    public PageHelper<BArticle> getUserListPage02(BArticle bArticle) {
-        String a = "ss";
-        int b =  bArticle.getLimit();
-        int c =  bArticle.getOffset();
-        int d = bArticle.getPage();
-        bArticle.setUserId(1);
-        PageHelper<BArticle> pageHelper = new PageHelper<BArticle>();
-
-        List<BArticle> list = articleService.selectUserArt(bArticle);
-        // 查询当前页实体对象
-        pageHelper.setRows(list);
-        // 统计总记录数
-        List<BArticle> list02 = articleService.selectUserArtCount(bArticle);
-        pageHelper.setTotal(list02.size());
-
-
-        return pageHelper;
-
-
-
-    }
 
 }

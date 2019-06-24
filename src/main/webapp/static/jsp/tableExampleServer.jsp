@@ -65,22 +65,22 @@
             return temp;
         },
         columns: [{
-            title: '登录名',
+            title: '标题',
             field: 'title',
             sortable: true
         }, {
-            title: '姓名',
+            title: '内容',
             field: 'content',
             sortable: true
         }, {
-            title: '手机号',
+            title: 'id',
             field: 'id',
         }, {
-            title: '性别',
+            title: '类别',
             field: 'type',
             formatter: formatSex,//对返回的数据进行处理再显示
         }, {
-            title: '操作',
+            title: '文章标题',
             field: 'article_no',
             formatter: operation,//对资源进行操作
         }]
@@ -101,7 +101,7 @@
         //查询按钮事件
         $('#search_btn').click(function() {
         $('#mytab').bootstrapTable('refresh', {
-            url : '/Page/tableExampleServer02'
+            url : '/Page/tableExampleServer'
         });
         })
 
