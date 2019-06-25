@@ -59,12 +59,7 @@ public class PageHelperController {
         // 统计总记录数
         List<BArticle> list02 = articleService.selectUserArtCount(bArticle);
         pageHelper.setTotal(list02.size());
-
-
         return pageHelper;
-
-
-
     }
 
 
