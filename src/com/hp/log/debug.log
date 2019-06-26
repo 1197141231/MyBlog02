@@ -1,0 +1,20 @@
+2019-05-28 13:50:26 下午 [Thread: main][ Class:com.bugong.unity.TestLog4j >> Method: com.bugong.unity.TestLog4j.main(TestLog4j.java:9) ]
+DEBUG: This is debug!!!
+2019-05-28 13:50:26 下午 [Thread: main][ Class:com.bugong.unity.TestLog4j >> Method: com.bugong.unity.TestLog4j.main(TestLog4j.java:10) ]
+INFO: This is info!!!
+2019-05-28 13:50:26 下午 [Thread: main][ Class:com.bugong.unity.TestLog4j >> Method: com.bugong.unity.TestLog4j.main(TestLog4j.java:11) ]
+WARN: This is warn!!!
+2019-05-28 13:50:26 下午 [Thread: main][ Class:com.bugong.unity.TestLog4j >> Method: com.bugong.unity.TestLog4j.main(TestLog4j.java:12) ]
+ERROR: This is error!!!
+2019-05-28 13:50:26 下午 [Thread: main][ Class:com.bugong.unity.TestLog4j >> Method: com.bugong.unity.TestLog4j.main(TestLog4j.java:13) ]
+FATAL: This is fatal!!!
+2019-05-28 13:50:56 下午 [Thread: main][ Class:com.bugong.unity.TestLog4j >> Method: com.bugong.unity.TestLog4j.main(TestLog4j.java:9) ]
+DEBUG: This is debug!!!
+2019-05-28 13:50:56 下午 [Thread: main][ Class:com.bugong.unity.TestLog4j >> Method: com.bugong.unity.TestLog4j.main(TestLog4j.java:10) ]
+INFO: This is info!!!
+2019-05-28 13:50:56 下午 [Thread: main][ Class:com.bugong.unity.TestLog4j >> Method: com.bugong.unity.TestLog4j.main(TestLog4j.java:11) ]
+WARN: This is warn!!!
+2019-05-28 13:50:56 下午 [Thread: main][ Class:com.bugong.unity.TestLog4j >> Method: com.bugong.unity.TestLog4j.main(TestLog4j.java:12) ]
+ERROR: This is error!!!
+2019-05-28 13:50:56 下午 [Thread: main][ Class:com.bugong.unity.TestLog4j >> Method: com.bugong.unity.TestLog4j.main(TestLog4j.java:13) ]
+FATAL: This is fatal!!!
