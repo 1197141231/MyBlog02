@@ -37,13 +37,13 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            <a class="navbar-brand" href="/login/toLogin">网站名</a>
+            <a class="navbar-brand" href="/login/toLogin">乐园</a>
         </div>
         <div class="collapse navbar-collapse" id="myNavbar">
             <ul class="nav navbar-nav">
                 <li class="active"><a href="#">主页</a></li>
-                <li><a href="../../static/jsp/article.jsp">文章</a></li>
-                <li><a href="../../static/jsp/article.jsp">留言</a></li>
+                <li><a href="../../static/jsp/article04.jsp">文章</a></li>
+                <li><a href="../../static/jsp/article04.jsp">留言</a></li>
             </ul>
         </div>
     </div>

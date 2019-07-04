@@ -5,8 +5,11 @@ import com.bugong.domain.PageHelper;
 import com.bugong.domain.BArticle;
 import com.bugong.service.ArticleService;
 
+import org.springframework.beans.factory.BeanFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.ApplicationContext;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 
@@ -15,6 +18,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import java.util.Iterator;
 import java.util.List;
 
 @Controller
@@ -28,6 +32,8 @@ public class PageHelperController {
     @RequestMapping("/tableExampleClient")
     @ResponseBody
     public List<BArticle> getKeyWords(@RequestBody BArticle bArticle) {
+
+
         String a = bArticle.getContent();
         String b = bArticle.getTitle();
         bArticle.setUserId(1);
@@ -45,7 +51,7 @@ public class PageHelperController {
 
     @RequestMapping("/tableExampleServer")
     @ResponseBody
-    public PageHelper<BArticle> getUserListPage(@RequestBody BArticle bArticle) {
+    public PageHelper<BArticle> getUserListPage(@RequestBody BArticle bArticle, Model model) {
         String a = "ss";
         int b =  bArticle.getLimit();
         int c =  bArticle.getOffset();
@@ -59,6 +65,9 @@ public class PageHelperController {
         // 统计总记录数
         List<BArticle> list02 = articleService.selectUserArtCount(bArticle);
         pageHelper.setTotal(list02.size());
+        int t = pageHelper.getTotal();
+        model.addAttribute("total",t);
+
         return pageHelper;
     }
 

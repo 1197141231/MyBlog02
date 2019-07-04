@@ -178,8 +178,12 @@
             <!--<version>2.4</version>-->
             <!--<classifier>jdk15</classifier>-->
         <!--</dependency>-->
-
-
+        <!--jstl标签 -->
+        <dependency>
+            <groupId>javax.servlet</groupId>
+            <artifactId>jstl</artifactId>
+            <version>1.2</version>
+        </dependency>
 
     </dependencies>
 
